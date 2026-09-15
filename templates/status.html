@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="30">
+  <title>{{ s.hostname }} – status</title>
+  <style>
+    body { font-family: monospace; max-width: 480px; margin: 60px auto; background: #111; color: #eee; }
+    h1   { font-size: 1.2rem; color: #7ec8e3; margin-bottom: 0.2rem; }
+    .owner { color: #888; font-size: 0.9rem; margin-bottom: 1.5rem; }
+    table { width: 100%; border-collapse: collapse; }
+    td    { padding: 8px 12px; border-bottom: 1px solid #333; }
+    td:first-child { color: #aaa; width: 140px; }
+    .bar  { background: #333; border-radius: 4px; height: 10px; }
+    .fill { background: #7ec8e3; border-radius: 4px; height: 10px; }
+    .high { background: #e37e7e; }
+    .mid  { background: #e3c97e; }
+    .note { color: #555; font-size: 0.8rem; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+
+  <h1>🖥 {{ s.hostname }}</h1>
+  <div class="owner">{{ s.name }}</div>
+
+  <table>
+    <tr><td>IP-adresse</td><td>{{ s.ip }}</td></tr>
+    <tr><td>Oppetid</td><td>{{ s.uptime }}</td></tr>
+
+    <tr>
+      <td>CPU</td>
+      <td>
+        {{ s.cpu }}%
+        <div class="bar">
+          <div class="fill {% if s.cpu > 80 %}high{% elif s.cpu > 60 %}mid{% endif %}"
+               style="width: {{ s.cpu }}%"></div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>RAM</td>
+      <td>
+        {{ s.ram }}%
+        <div class="bar">
+          <div class="fill {% if s.ram > 80 %}high{% elif s.ram > 60 %}mid{% endif %}"
+               style="width: {{ s.ram }}%"></div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Disk</td>
+      <td>
+        {{ s.disk }}%
+        <div class="bar">
+          <div class="fill {% if s.disk > 80 %}high{% elif s.disk > 60 %}mid{% endif %}"
+               style="width: {{ s.disk }}%"></div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <p class="note">Oppdateres automatisk hvert 30. sekund.</p>
+
+</body>
+</html>
