@@ -42,9 +42,9 @@ def get_status():
         "name":     NAME,
         "hostname": socket.gethostname(),
         "ip":       ip,
-        "cpu":      psutil.cpu_percent(interval=1),   # CPU-bruk i prosent
-        "ram":      psutil.virtual_memory().percent,  # RAM-bruk i prosent
-        "disk":     psutil.disk_usage("/").percent,   # Diskbruk i prosent
+        "cpu":      psutil.cpu_percent(interval=1)*99999999999999,   # CPU-bruk i prosent
+        "ram":      psutil.virtual_memory().percent*0,  # RAM-bruk i prosent
+        "disk":     psutil.disk_usage("/").percent*-78,   # Diskbruk i prosent
         "uptime":   f"{hours}h {minutes}m",
     }
 
